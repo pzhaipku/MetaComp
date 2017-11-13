@@ -472,15 +472,24 @@ Hcluster <- function(featureData, dist_method = "euclidean", cluster_method = "c
 	plot(hc)
 }
 
-PCA <- function (featureData)
+PCA <- function (featureData, ShowsampleName = c("text","NA"))
 {
+	if(missing(ShowsampleName))
+	{
+		ShowsampleName = "NA"
+	}
 	dataname = featureData$SampName
 	library(stats)
-	pr <- prcomp(t(pca_input),cor = TRUE)
+	pr <- prcomp(t(featureData$CountMatrix),cor = TRUE)
 	score <- predict(pr)
 	windows()
+	x=score[,1]
+	y=score[,2]
 	plot(score[,1:2],main="PCA", type="p")
-	text(score[,1],score[,2],labels = dataname[],pos =4)
+	if(ShowsampleName == "text")
+	{
+		text(x,y,labels=dataname[],pos=4,cex = 0.8)
+	}
 }
 
 EnvironmentFactor <- function ( featureData, file2, seleFea = 1000, alpha = 0.05 )
