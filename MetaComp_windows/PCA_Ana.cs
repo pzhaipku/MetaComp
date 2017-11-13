@@ -40,7 +40,7 @@ namespace MetaComp
             
             PCA.Initialize();
 
-            NumericMatrix Freq = PCA.CreateNumericMatrix(app.FreqMatrix);
+            NumericMatrix Freq = PCA.CreateNumericMatrix(app.CountMatrix);
             PCA.SetSymbol("Freq", Freq);
             CharacterVector SampleName = PCA.CreateCharacterVector(app.SamName);
             CharacterVector FeatureName = PCA.CreateCharacterVector(app.FeaName);
@@ -61,7 +61,6 @@ namespace MetaComp
             {
                 PCA.Evaluate("windows()");
                 PCA.Evaluate("plot(score[,1:2],main=\"PCA\", type=\"p\")");
-                PCA.Evaluate("text(score[,1],score[,2],labels = SampleName[],pos =4)");
             }
 
             else
